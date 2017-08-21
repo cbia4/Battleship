@@ -12,6 +12,8 @@ import java.util.Map;
 public class Board {
 
     private final int BOARD_SIZE;
+    private final String LEFT = "LEFT";
+    private final String DOWN = "DOWN";
     private char[][] board;
     private int numShips;
     private Map<String,Ship> shipPositions;
@@ -43,8 +45,11 @@ public class Board {
         int col = coords[1];
 
         // check for invalid ship parameters
-        if (row < 0 || col < 0 || row + length > BOARD_SIZE || col + length > BOARD_SIZE) return false;
-        if (!(direction.equalsIgnoreCase("LEFT") || direction.equalsIgnoreCase("DOWN"))) return false;
+        if (!(direction.equalsIgnoreCase(LEFT) || direction.equalsIgnoreCase(DOWN))) return false;
+        if (row < 0 || col < 0
+                || (row + length > BOARD_SIZE && direction.equalsIgnoreCase(DOWN))
+                || (col + length > BOARD_SIZE && direction.equalsIgnoreCase(LEFT))) return false;
+
 
         // determine the ships position from input parameters
         String[] shipPosition = generateShipPositions(row,col,length,direction);
@@ -71,7 +76,7 @@ public class Board {
         for(int i = 0; i < len; i++) {
             shipPosition[i] = GameUtil.coordToStr(row) + Integer.toString(col);
             if (this.shipPositions.containsKey(shipPosition[i])) return null; // return null if the coordinate is already taken by another ship
-            if (dir.equalsIgnoreCase("LEFT")) col++;
+            if (dir.equalsIgnoreCase(LEFT)) col++;
             else row++;
         }
         return shipPosition;
@@ -109,23 +114,31 @@ public class Board {
         return msg;
     }
 
+    public int getNumShips() { return this.numShips; }
+    public List<Ship> getShips() { return this.ships; }
+
     public void printShips() {
+        System.out.println("–––––––––––––– SHIP POSITIONS –––––––––––––––");
+        System.out.println();
         for(Ship s : this.ships) s.printPosition();
+        System.out.println();
     }
 
     public void prettyPrint() {
+        System.out.println("––––––––––––– BATTLESHIP BOARD ––––––––––––––");
         System.out.print("   ");
         for(int i = 0; i < BOARD_SIZE; i++) {
-            System.out.print(i + " ");
+            System.out.print(String.format("%4s",i));
         }
-        System.out.println();
+        System.out.println("");
         for(int i = 0; i < BOARD_SIZE; i++) {
-            System.out.print(GameUtil.coordToStr(i) + " ");
+            System.out.print(String.format("%3s",GameUtil.coordToStr(i)));
             for(int j = 0; j < BOARD_SIZE; j++) {
-                System.out.print(" " + board[i][j]);
+                System.out.print(String.format("%4s",board[i][j]));
             }
-            System.out.println();
+            System.out.println("");
         }
+        System.out.println("–––––––––––––––––––––––––––––––––––––––––––––");
         System.out.println();
     }
 }
