@@ -28,12 +28,14 @@ public class Ship {
         System.out.println(this.id + " -> " + Arrays.toString(this.shipPosition));
     }
 
+    // determine whether the ship is hit or sunk
     public String hit(String position) {
         positionsLeft.remove(position);
         if (positionsLeft.size() < 1) return "Sunk";
         return "Hit";
     }
 
+    // return a copy of the ship's position array
     public String[] getPosition() {
         String[] positionCopy = new String[this.shipSize];
         System.arraycopy(this.shipPosition,0,positionCopy,0, this.shipSize);
