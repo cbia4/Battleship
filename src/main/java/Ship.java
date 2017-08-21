@@ -25,7 +25,8 @@ public class Ship {
     }
 
     public void printPosition() {
-        System.out.println(this.id + " -> " + Arrays.toString(this.shipPosition));
+        System.out.print(String.format("%3s",this.id));
+        System.out.println(" -> " + Arrays.toString(this.shipPosition));
     }
 
     // determine whether the ship is hit or sunk
