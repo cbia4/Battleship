@@ -11,7 +11,7 @@ public class GameTest {
     @Test
     public void shipOutOfBoundsTest() {
 
-        Board b1 = new Board();
+        Board b1 = new Board(10);
         Assert.assertEquals(true,b1.createShip(10,"A","0","LEFT"));
         Assert.assertEquals(false,b1.createShip(11,"B","0","LEFT"));
         Assert.assertEquals(true,b1.createShip(5,"C","5","LEFT"));
@@ -21,7 +21,7 @@ public class GameTest {
     @Test
     public void shipCollisionTest() {
 
-        Board b1 = new Board();
+        Board b1 = new Board(10);
         Assert.assertEquals(true,b1.createShip(5,"A","0","LEFT"));
         Assert.assertEquals(false,b1.createShip(5,"A","2","DOWN"));
         Assert.assertEquals(true,b1.createShip(5,"B","2","DOWN"));
@@ -30,7 +30,8 @@ public class GameTest {
 
     @Test
     public void gameTest1() {
-        Board b = new Board();
+
+        Board b = new Board(10);
 
         Assert.assertEquals(true,b.createShip(4,"A","0","LEFT"));
         Assert.assertEquals(true,b.createShip(3,"C","0","LEFT"));
