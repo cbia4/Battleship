@@ -11,14 +11,15 @@ import java.util.Map;
 
 public class Board {
 
-    private final int BOARD_SIZE = 10;
+    private final int BOARD_SIZE;
     private char[][] board;
     private int numShips;
     private Map<String,Ship> shipPositions;
     private List<Ship> ships;
 
-    public Board() {
+    public Board(int size) {
 
+        this.BOARD_SIZE = size;
         this.board = new char[BOARD_SIZE][BOARD_SIZE];
         this.numShips = 0;
         this.shipPositions = new HashMap<>();
