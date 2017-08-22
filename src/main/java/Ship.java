@@ -13,10 +13,10 @@ public class Ship {
 
     private int id;
     private int shipSize;
-    private String[] shipPosition;
-    private Set<String> positionsLeft;
+    private Position[] shipPosition;
+    private Set<Position> positionsLeft;
 
-    public Ship(int id, String[] shipPosition) {
+    public Ship(int id, Position[] shipPosition) {
         this.id = id;
         this.shipPosition = shipPosition;
         this.shipSize = this.shipPosition.length;
@@ -30,15 +30,15 @@ public class Ship {
     }
 
     // determine whether the ship is hit or sunk
-    public String hit(String position) {
+    public String hit(Position position) {
         positionsLeft.remove(position);
         if (positionsLeft.size() < 1) return "Sunk";
         return "Hit";
     }
 
     // return a copy of the ship's position array
-    public String[] getPosition() {
-        String[] positionCopy = new String[this.shipSize];
+    public Position[] getPosition() {
+        Position[] positionCopy = new Position[this.shipSize];
         System.arraycopy(this.shipPosition,0,positionCopy,0, this.shipSize);
         return positionCopy;
     }
