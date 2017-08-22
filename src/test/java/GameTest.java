@@ -4,11 +4,8 @@
  */
 
 
-import javafx.geometry.Pos;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.*;
 
 
 public class GameTest {
