@@ -1,10 +1,15 @@
 /**
  * Created by colinbiafore on 8/20/17.
+ * Automated game tests and error check tests
  */
 
 
+import javafx.geometry.Pos;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.*;
+
 
 public class GameTest {
 
@@ -12,20 +17,20 @@ public class GameTest {
     public void shipOutOfBoundsTest() {
 
         Board b1 = new Board(10);
-        Assert.assertEquals(true,b1.createShip(10,"A","0","LEFT"));
-        Assert.assertEquals(false,b1.createShip(11,"B","0","LEFT"));
-        Assert.assertEquals(true,b1.createShip(5,"C","5","LEFT"));
-        Assert.assertEquals(false,b1.createShip(6,"J","6","LEFT"));
+        Assert.assertEquals(true,b1.createShip(10,new Position(0,0),"LEFT"));
+        Assert.assertEquals(false,b1.createShip(11,new Position(1,0),"LEFT"));
+        Assert.assertEquals(true,b1.createShip(5,new Position(2,5),"LEFT"));
+        Assert.assertEquals(false,b1.createShip(6,new Position(9,6),"LEFT"));
     }
 
     @Test
     public void shipCollisionTest() {
 
         Board b1 = new Board(10);
-        Assert.assertEquals(true,b1.createShip(5,"A","0","LEFT"));
-        Assert.assertEquals(false,b1.createShip(5,"A","2","DOWN"));
-        Assert.assertEquals(true,b1.createShip(5,"B","2","DOWN"));
-        Assert.assertEquals(false,b1.createShip(3,"D","1","LEFT"));
+        Assert.assertEquals(true,b1.createShip(5,new Position(0,0),"LEFT"));
+        Assert.assertEquals(false,b1.createShip(5,new Position(0,2),"DOWN"));
+        Assert.assertEquals(true,b1.createShip(5,new Position(2,2),"DOWN"));
+        Assert.assertEquals(false,b1.createShip(3,new Position(3,1),"LEFT"));
     }
 
     @Test
@@ -33,9 +38,10 @@ public class GameTest {
 
         Board b = new Board(10);
 
-        Assert.assertEquals(true,b.createShip(4,"A","0","LEFT"));
-        Assert.assertEquals(true,b.createShip(3,"C","0","LEFT"));
-        Assert.assertEquals(true,b.createShip(2,"E","0","LEFT"));
+        Assert.assertEquals(true,b.createShip(4,new Position(0,0),"LEFT"));
+        Assert.assertEquals(true,b.createShip(3,new Position(2,0),"LEFT"));
+        Assert.assertEquals(true,b.createShip(2,new Position(4,0),"LEFT"));
+
 
         b.printShips();
 
@@ -53,7 +59,4 @@ public class GameTest {
 
         b.prettyPrint();
     }
-
-
-
 }
